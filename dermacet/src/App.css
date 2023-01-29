@@ -66,7 +66,53 @@
 
 .userBtn img{
   width: 2.2rem;
-    border: 2px solid var(--theme);
-    padding: 0.2rem;
-    border-radius: 50px;
+  border: 2px solid var(--theme);
+  padding: 0.2rem;
+  border-radius: 50px;
+}
+
+
+
+.landingHome{
+  display: flex;
+  background: linear-gradient(270deg, #E4E4E4 0%, #F7F7F7 100%);
+  justify-content: space-around;
+}
+
+.leftSide span{
+  display: block;
+}
+
+.rightSide img{
+  width: 50.5rem;
+}
+
+.leftContent:nth-child(1){
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.leftContent:nth-child(2){
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 69px;
+}
+
+.leftContent:nth-child(3){
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 69px;
+}
+
+.leftContentBox{
+  position: relative;
+  top: 10rem;
+  left: 10rem;
+}
+
+.leftContent:nth-child(4){
+  background: var(--theme);
+  border-radius: 5px;
+  color: white;
+  margin: 1rem 0;
 }
