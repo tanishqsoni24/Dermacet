@@ -8,7 +8,7 @@ export default function LandingPage() {
                 <span className="leftContent">New Collection</span>
                 <span className="leftContent">Get The Skin</span>
                 <span className="leftContent">You Want To Feel</span>
-                <a href="#" className="btn leftContent">Shop Now &#8594;</a>
+                <a href="#" className="leftContent buyBtn">Shop Now &#8594;</a>
             </div>
         </div>
         <div className="rightSide">
