@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import LandingPage from './components/LandingPage'
 import ServiceLvl from './components/ServiceLvl'
 import PopularProducts from './components/PopularProducts'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <LandingPage/>
       <ServiceLvl/>
       <PopularProducts/>
+      <Footer/>
     </>
   );
 }
