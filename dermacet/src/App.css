@@ -116,3 +116,47 @@
   color: white;
   margin: 1rem 0;
 }
+
+
+
+.headMessage{
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 48px;
+  text-align: center;
+  max-width: 49rem;
+  margin: 5rem auto;
+}
+
+.headMessage span{
+  color: var(--theme);
+}
+
+.FourCards{
+  display: flex;
+  justify-content: space-around;
+}
+
+.serviceCards{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 16.875rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.12);
+  padding: 1rem;
+  margin: 0 0 5rem 0;
+}
+
+.serviceCards h2{
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 0.7rem 0;
+}
+
+.serviceCards h3{ 
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
