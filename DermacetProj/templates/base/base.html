@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html oncontextmenu="return false" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dermacet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        /* Navbar */
+
+        :root{
+            --theme:#475D44;
+            --focus:#344232;
+        }
+
+        .searchMenu img{
+            width: 1.1875rem;
+            height: 1.2rem;
+        }
+
+        .searchMenu{
+            display: flex;
+            padding: 0.5rem 0;
+            justify-content: center;
+        }
+
+        .inputSpace{
+            border: 1px solid black;
+            border-radius: 3px 0px 0 3px;
+            padding: 0.2rem 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .searchMenu button{
+            border: none;
+            border-radius: 0px 3px 3px 0;
+            background-color: var(--theme);
+            color: white;
+            padding: 0 1rem;
+        }
+
+        .searchQueryBox{
+            margin: auto;
+        }
+
+        .searchQueryBox input{
+            border: none;
+            background-color: transparent;
+        }
+
+        .searchQueryBox input:focus{
+            outline: none;
+        }
+
+        .navbar-collapse {
+            flex-grow: 0;
+        }
+
+        .navbar>.container-fluid{
+            justify-content: space-around;
+        }
+
+        .brandName img{
+            max-width: 6rem;
+        }
+
+        .navbar{
+            border-bottom: 1px solid #dbdbdb;
+            background-color: transparent;
+        }
+
+        .userBtn{
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+
+        .userBtn img{
+            width: 2.2rem;
+            border: 2px solid var(--theme);
+            padding: 0.2rem;
+            border-radius: 50px;
+        }
+
+        /* Footer */
+
+        .footer{
+            background: #f9f9f9;
+        }
+
+        .footerUpbox{
+            display: flex;
+            flex-wrap: wrap;
+            border-bottom: 1px solid grey;
+            justify-content: space-around;
+            max-width: 90vw;
+            margin: auto;
+        }
+
+        .linkHeadingsFooter{
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 28px;
+            color: var(--theme);
+        }
+
+        .footerLinks{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footerLinks a{
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            text-decoration: none;
+            color: grey;
+            margin: 0.4rem 0;
+        }
+
+        .footerBoxes{
+            margin: 5rem 0;
+        }
+
+        .newsletterBox{
+            background: rgba(32, 60, 134, 0.05);
+            mix-blend-mode: normal;
+            padding: 2rem;
+        }
+
+        .inputArea{
+            margin: 1.7rem 0 0 0;
+        }
+
+        .inputArea input{
+            padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+            margin: 0;
+            border: none;
+            border-bottom: 3px solid #989898;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .inputArea input:focus{
+            outline: none;
+        }
+
+        .inputArea button{
+            background: var(--theme);
+            border-radius: 0 5px 5px 0;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .inputArea img{
+            width: 1.5rem;
+        }
+
+        .newsletterDescp{
+            max-width: 17rem;
+            margin: 1rem 0 0 0;
+        }
+
+        .footerFooter{
+            display: flex;
+            justify-content: space-between;
+            max-width: 90vw;
+            align-items: center;
+            margin: 1rem auto;
+        }
+
+        .footerFooter > img{
+            width: 7rem;
+        }
+
+        .midLinks{
+            display: flex;
+        }
+
+        .midLinks a{
+            margin: 0 0.5rem;
+            text-decoration: none;
+            color: black;
+        }
+
+        .footerConnections img{
+            width: 2rem;
+            margin: 0 0.5rem;
+        }
+    </style>
+    {% block css %}
+    {% endblock  %}
+</head>
+<body>
+    <!-- Navbar -->
+
+    <nav class="navbar navBar navbar-expand-lg">
+        <div class="container-fluid">
+          <div class="d-flex">
+              <a class="navbar-brand brandName" href="#">
+                  <img src="/media/plugins/DermacetLogoUpdated.png" alt="" />
+              </a>
+              <div class="searchMenu">
+                  <form action="" method="get" class="searchQueryBox d-flex">
+                      <div class="inputSpace">
+                          <img src="/media/plugins/search.png" alt="noImg" class="srchImg"/>
+                          <input type="text" name="" id="" placeholder="Search Products Here"/>
+                      </div>
+                      <button type="submit" title="search">Search</button>
+                  </form>
+              </div>
+          </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-lg-0 navItems">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Shop</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Services</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Career</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact Us</a>
+              </li>
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle userBtn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/media/plugins/userAdmin.png" alt="" /></a>
+                  <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Login</a></li>
+                      <li><a class="dropdown-item" href="#">Sign Up</a></li>
+                  </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    {% block start %}
+    
+    {% endblock %}
+
+    <!-- Footer -->
+
+    <div class='footer'>
+        <div class="footerUpbox">
+            <div class="footerBoxes">
+                <h2 class="linkHeadingsFooter">Product</h2>
+                <div class="footerLinks">
+                    <a href="">Acne Free</a>
+                    <a href="">Oil</a>
+                    <a href="">Career</a>
+                    <a href="">Shop</a>
+                    <a href="">Contact Us</a>
+                </div>
+            </div>
+            <div class="footerBoxes">
+                <h2 class="linkHeadingsFooter">Information</h2>
+                <div class="footerLinks">
+                    <a href="">FAQ's</a>
+                    <a href="">Blog</a>
+                    <a href="">Support</a>
+                </div>
+            </div>
+            <div class="footerBoxes">
+                <h2 class="linkHeadingsFooter">Company</h2>
+                <div class="footerLinks">
+                    <a href="">About Us</a>
+                    <a href="">Career</a>
+                    <a href="">Contact Us</a>
+                    <a href="">Dermacet</a>
+                </div>
+            </div>
+            <form action='' method='post' class="newsletterBox footerBoxes">
+                <h3>Subscribe</h3>
+                <div class="inputArea">
+                    <input type="email" name="" id="" placeholder='Your Email Here!'/>
+                    <button type="submit">
+                        <img src="/media/plugins/sendArrow.png" alt="arrow" />
+                    </button>
+                    <p class="newsletterDescp">
+                    Hello, we are Dermacet. Our goal is to develop the efficient skin care and body care products, combined institutional and home treatment to satisfy end users.
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div class="footerFooter">
+            <img src="/media/plugins/DermacetLogoUpdated.png" alt="logo" class="footerLogo" />
+            <div class="midLinks">
+                <a href="">Terms</a>
+                <a href="">Privacy</a>
+                <a href="">Cookies</a>
+            </div>
+            <div class="footerConnections">
+                <a href=""><img src="/media/plugins/fbicon.png" alt="fb" class="logos" /></a>
+                <a href=""><img src="/media/plugins/instaicon.png" alt="insta" class="logos" /></a>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
