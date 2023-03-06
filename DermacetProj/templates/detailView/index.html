@@ -1,0 +1,347 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+<style>
+    /* Landing Home Page */
+
+.landingHome{
+  display: flex;
+  background: linear-gradient(270deg, #E4E4E4 0%, #F7F7F7 100%);
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.leftSide span{
+  display: block;
+}
+
+.rightSide img{
+  width: 50.5rem;
+}
+
+.leftContent:nth-child(1){
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.leftContent:nth-child(2){
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 69px;
+}
+
+.leftContent:nth-child(3){
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 69px;
+}
+
+.leftContentBox{
+  position: relative;
+  top: 10rem;
+  left: 10rem;
+}
+
+.leftContent:nth-child(4){
+  background: var(--theme);
+  border-radius: 5px;
+  color: white;
+  margin: 1rem 0;
+}
+
+/* Service Level Page */
+
+.headMessage{
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 48px;
+  text-align: center;
+  max-width: 49rem;
+  margin: 5rem auto;
+}
+
+.headMessage span{
+  color: var(--theme);
+}
+
+.FourCards{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.serviceCards{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 16.875rem;
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.12);
+  padding: 1rem;
+  margin: 0 0 5rem 0;
+}
+
+.serviceCards h2{
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  margin: 0.7rem 0;
+}
+
+.serviceCards h3{ 
+  text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+/* Popular Prodcuts */
+
+.PopProd_heading{
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 48px;
+  margin: 0 0 5rem 0;
+  text-align: center;
+}
+
+.PopProd_heading span{
+  color: var(--theme);
+}
+
+.all_prods{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.products{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid;
+  padding: 1rem;
+  border-radius: 5px;
+}
+
+.prodImg{
+  width:10.7137rem;
+  mix-blend-mode: darken;
+}
+
+.prodTitle{
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.prodReview{
+  display: flex;
+}
+
+.prodReview > span{
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.reviewBox{
+  display: flex;
+  align-items: center;
+}
+
+.reviewBox img{
+  width: 0.7531rem;
+  height: 0.7388rem;
+}
+
+.prodBtns{
+  margin-top: 1rem;
+}
+
+.buyBtn{
+  background: var(--theme);
+  color: white;
+  border-radius: 0;
+  border: 2px solid var(--theme);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.buyBtn:hover{
+  color: white;
+  background: var(--theme);
+}
+
+.buyBtn:active{
+  background: var(--focus);
+  border: 2px solid var(--focus);
+}
+
+.cartBtn{
+  border: 2px solid var(--theme);
+  border-radius: 0;
+  color: var(--theme);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.moreBtn{
+  margin: 5rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.cartBtn:active{
+  background-color: rgb(216 216 216 / 57%);
+}
+
+</style>
+
+{% endblock  %}
+
+{% block start %}
+<!-- Landing Page -->
+
+<div class="landingHome">
+    <div class="leftSide">
+        <div class="leftContentBox">
+            <span class="leftContent">New Collection</span>
+            <span class="leftContent">Get The Skin</span>
+            <span class="leftContent">You Want To Feel</span>
+            <a href="#" class="leftContent btn">Shop Now &#8594;</a>
+        </div>
+    </div>
+    <div class="rightSide">
+        <img src="/media/plugins/girl.png" alt="noting to show" />
+    </div>
+</div>
+
+<!-- Service Level Page -->
+
+<div class="ServiceLvl">
+    <h2 class="headMessage"><span>Unleash </span>your inner beauty with our wide range of cosmetics.</h2>
+    <div class="FourCards">
+        <div class="serviceCards">
+            <img src="/media/plugins/warehouse.png" alt="" />
+            <h2>Warehouse</h2>
+            <h3 class="ServiceStatement">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, atque.
+            </h3>
+        </div>
+        <div class="serviceCards">
+            <img src="/media/plugins/delivery.png" alt="" />
+            <h2>Product Shipping</h2>
+            <h3 class="ServiceStatement">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, atque.
+            </h3>
+        </div>
+        <div class="serviceCards">
+            <img src="/media/plugins/customer.png" alt="" />
+            <h2>Customer Support</h2>
+            <h3 class="ServiceStatement">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, atque.
+            </h3>
+        </div>
+        <div class="serviceCards">
+            <img src="/media/plugins/natural.png" alt="" />
+            <h2>Natural Products</h2>
+            <h3 class="ServiceStatement">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum, atque.
+            </h3>
+        </div>
+    </div>
+</div>
+
+<!-- Popular Products -->
+
+<div>
+    <h2 class="PopProd_heading">
+      <span>Popular </span>
+      Products
+    </h2>
+    <div class="all_prods">
+      <div class="products">
+          <img src="/media/plugins/pimple.jpg" alt="" class="prodImg" />
+          <h3 class="prodTitle">Neem Acne Free Cream</h3>
+          <div class="prodReview">
+              <span>⭐4.5 | </span>
+              <div class="reviewBox">
+                  <img src="/media/plugins/verified.png" alt="" />
+                  <span> 4 reviews</span>
+              </div>
+          </div>
+          <div class="prodRate">
+              <span>₹220.00 <strike>₹250.00</strike></span>
+          </div>
+          <div class="prodBtns">
+              <a class="buyBtn">Buy Now</a>
+              <a class="cartBtn">Add to cart</a>
+          </div>
+      </div>
+      <div class="products">
+          <img src="/media/plugins/dtan.jpg" alt="" class="prodImg" />
+          <h3 class="prodTitle">Neem Acne Free Cream</h3>
+          <div class="prodReview">
+              <span>⭐4.5 | </span>
+              <div class="reviewBox">
+                  <img src="/media/plugins/verified.png" alt="" />
+                   4 reviews
+              </div>
+          </div>
+          <div class="prodRate">
+              <span>₹220.00 <strike>₹250.00</strike></span>
+          </div>
+          <div class="prodBtns">
+              <a class="buyBtn">Buy Now</a>
+              <a class="cartBtn">Add to cart</a>
+          </div>
+      </div>
+      <div class="products">
+          <img src="/media/plugins/onionoil.jpg" alt="" class="prodImg" />
+          <h3 class="prodTitle">Neem Acne Free Cream</h3>
+          <div class="prodReview">
+              <span>⭐4.5 | </span>
+              <div class="reviewBox">
+                  <img src="/media/plugins/verified.png" alt="" />
+                   4 reviews
+              </div>
+          </div>
+          <div class="prodRate">
+              <span>₹220.00 <strike>₹250.00</strike></span>
+          </div>
+          <div class="prodBtns">
+              <a class="buyBtn">Buy Now</a>
+              <a class="cartBtn">Add to cart</a>
+          </div>
+      </div>
+      <div class="products">
+          <img src="/media/plugins/ricescrub.jpg" alt="" class="prodImg" />
+          <h3 class="prodTitle">Neem Acne Free Cream</h3>
+          <div class="prodReview">
+              <span>⭐4.5 | </span>
+              <div class="reviewBox">
+                  <img src="/media/plugins/verified.png" alt="" />
+                   4 reviews
+              </div>
+          </div>
+          <div class="prodRate">
+              <span>₹220.00 <strike>₹250.00</strike></span>
+          </div>
+          <div class="prodBtns">
+              <a class="buyBtn">Buy Now</a>
+              <a class="cartBtn">Add to cart</a>
+          </div>
+      </div>
+    </div>
+    <div class="moreBtn">
+      <a href="#" class="cartBtn" >See All</a>
+    </div>
+  </div>
+
+  
+{% endblock %}
