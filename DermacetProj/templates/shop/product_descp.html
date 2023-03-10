@@ -1,0 +1,205 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+<style>
+
+    .shopDescp{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 2rem auto 5rem auto;
+        /* border: 2px solid red; */
+    }
+
+    .leftShop{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* border: 2px solid red; */
+    }
+
+    .mainImg img{
+        width: 20rem;
+        margin: 0 0 1rem 0;
+        border: 1px solid;
+    }
+
+    .moreImages{
+        display: flex;
+    }
+
+    .moreImages img{
+        width: 3.75rem;
+        border: 1px solid #D8D8D8;
+        margin: 0 2px;
+        border-radius: 5px;
+    }
+
+    .rightShop{
+        /* border: 2px solid red; */
+        display: flex;
+        flex-direction: column;
+        margin-left: 1rem;
+    }
+
+    .topDescp span{
+        display: block;
+    }
+
+    .aboutProduct_and_oderbox{
+        display: flex;
+        margin-top: 10px;
+        flex-wrap: wrap;
+    }
+
+    .orderForm{
+        border: 2px solid var(--theme);
+        border-radius: 5px;
+        padding: 1rem;
+    }
+    
+    .descpBox{
+        width: 20vw;
+        /* border: 2px solid red; */
+    }
+    
+    .descriptionList li{
+        margin: 5px 0;
+    }
+    
+    .orderBox{
+        /* border: 2px solid red; */
+        display: flex;
+        align-items: end;
+        margin-left: 1rem;
+    }
+
+    .smallDescp span:nth-child(1), .smallDescp span:nth-child(3){
+        color: var(--theme);
+        font-weight: bolder;
+    }
+
+    .smallDescp > span{
+        display: block;
+        margin: 0.5rem 0;
+        color: black;
+    }
+
+
+    .quantityType{
+        border: 1px solid #D8D8D8;
+        margin: 5px 0;
+        display: flex;
+    }
+
+    .quantityType span{
+        padding: 0 0.5rem;
+        cursor: pointer;
+    }
+
+    .quantityType span:hover{
+        background: #DBE8E8;
+    }
+    
+    .quantityType input{
+        border: none;
+        outline: none;
+        /* width: 2rem; */
+        text-align: center;
+    }
+    
+    .quantityType input::-webkit-outer-spin-button, .quantityType input::-webkit-inner-spin-button{
+        -webkit-appearance: none;
+    }
+
+    .buttonBox{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .buttonBox button{
+        margin: 5px 0;
+    }
+
+
+
+</style>
+
+{% endblock %}
+
+{% block start %}
+
+<div class="shopDescp container">
+    <div class="leftShop">
+        <div class="mainImg">
+            <img src="/media/plugins/onionoil.jpg" alt="onionoil">
+        </div>
+        <div class="moreImages">
+            <img src="/media/plugins/onionoil.jpg" alt="onionoil">
+            <img src="/media/plugins/onionoil.jpg" alt="onionoil">
+            <img src="/media/plugins/onionoil.jpg" alt="onionoil">
+            <img src="/media/plugins/onionoil.jpg" alt="onionoil">
+            <img src="/media/plugins/onionoil.jpg" alt="onionoil">
+        </div>
+    </div>
+    <div class="rightShop">
+        <div class="topDescp">
+            <span class="location">Home &rarr; Shop &rarr; Onion Hair Oil</span>
+            <span class="quantity">300ml</span>
+        </div>
+        <div class="fullDescp">
+            <div class="prodTitle">
+                <h2>Onion Anti-Hairfall Shampoo | Dermacet Organics</h2>
+                <span>₹ 220.00 &nbsp; &nbsp;<span>Incl. all taxes</span></span>
+            </div>
+            <div class="aboutProduct_and_oderbox">
+                <div class="descpBox">
+                    <h4>About this Item</h4>
+                    <ul class="descriptionList">
+                        <li>Software included: Pre-Installed Office Home and Student 2021 with lifetime validity.</li>
+                        <li>Software included: Pre-Installed Office Home and Student 2021 with lifetime validity.</li>
+                        <li>Software included: Pre-Installed Office Home and Student 2021 with lifetime validity.</li>
+                    </ul>
+                </div>
+                <div class="orderBox">
+                    <form class="orderForm">
+                        <div class="smallDescp">
+                            <span><span>₹</span> 220.00</span>
+                            <span>Inclusive all taxes</span>
+                            <span>Quantity</span>
+                        </div>
+                        <div class="quantityType">
+                            <span id="decrement">-</span>
+                            <input type="number" name="" id="productQuantity" value="1">
+                            <span id="increment" title="Add Quantity">+</span>
+                        </div>
+                        <div class="buttonBox">
+                            <button class="buyBtn">Buy Now</button>
+                            <button class="cartBtn">Add To Cart</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    document.getElementById("increment").addEventListener("click", ()=>{
+        let presentNum = document.getElementById("productQuantity").value
+        presentNum = (Number(presentNum) + 1).toString();
+        document.getElementById("productQuantity").setAttribute("value",presentNum)
+    })
+
+    document.getElementById("decrement").addEventListener("click", ()=>{
+        let presentNum = document.getElementById("productQuantity").value
+        presentNum = (Number(presentNum)==1?Number(presentNum):Number(presentNum) - 1).toString();
+        document.getElementById("productQuantity").setAttribute("value",presentNum)
+    })
+
+
+</script>
+
+{% endblock  %}
