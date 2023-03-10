@@ -189,14 +189,14 @@
 <script>
     document.getElementById("increment").addEventListener("click", ()=>{
         let presentNum = document.getElementById("productQuantity").value
-        presentNum = (Number(presentNum) + 1).toString();
-        document.getElementById("productQuantity").setAttribute("value",presentNum)
+        document.getElementById("productQuantity").value = (Number(presentNum) + 1).toString();
+        Number(presentNum)<1?Number(presentNum):document.getElementById("productQuantity").setAttribute("value",document.getElementById("productQuantity").value)
     })
 
     document.getElementById("decrement").addEventListener("click", ()=>{
         let presentNum = document.getElementById("productQuantity").value
-        presentNum = (Number(presentNum)==1?Number(presentNum):Number(presentNum) - 1).toString();
-        document.getElementById("productQuantity").setAttribute("value",presentNum)
+        document.getElementById("productQuantity").value = (Number(presentNum)<=1?Number(presentNum):Number(presentNum) - 1).toString();
+        Number(presentNum)<=1?Number(presentNum):document.getElementById("productQuantity").setAttribute("value",document.getElementById("productQuantity").value)
     })
 
 
