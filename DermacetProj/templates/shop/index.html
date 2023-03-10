@@ -1,0 +1,151 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+<style>
+    .sort_and_filter{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 4rem 1rem 4rem;
+        flex-wrap: wrap;
+    }
+
+    .filter span{
+        margin: 0 -1.5px;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        border: 2px solid #BBBBBB;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 21px;
+    }
+
+    .filter span:nth-child(1){
+        background-color: #DBE8E8;
+    }
+
+    .sortby{
+        padding: 0.5rem 10rem 0.5rem 1rem;
+        border-radius: 5px;
+        border: 1px solid #BBBBBB;
+        color: #707070;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 17px;
+        line-height: 21px;
+    }
+    .sortby:focus{
+        outline: none;
+    }
+
+    .allProducts{
+        margin: 0 0 5rem 0;
+    }
+
+    .sortby > option:hover{
+        background: var(--theme);
+    }
+</style>
+
+{% endblock %}
+
+{% block start %}
+
+  <h2 class="headMessage">
+    Get Latest <span>Beauty-Products</span> out there in the Markets
+  </h2>
+  <div class="sort_and_filter">
+    <div class="filter">
+        <span>ALL</span>
+        <span>HAIR</span>
+        <span>FACE</span>
+        <span>BODY</span>
+        <span>BABY</span>
+    </div>
+    <div class="sort">
+        <select name="" id="" class="sortby">
+            <option value="Ratings">Sort By</option>
+            <option value="Ratings">Ratings</option>
+            <option value="Price - High to Low">Price - High to Low</option>
+            <option value="Price - Low to High">Price - Low to High</option>
+        </select>
+    </div>
+  </div>
+  <div class="all_prods allProducts">
+    <div class="products">
+        <img src="/media/plugins/pimple.jpg" alt="" class="prodImg" />
+        <h3 class="prodTitle">Neem Acne Free Cream</h3>
+        <div class="prodReview">
+            <span>⭐4.5 | </span>
+            <div class="reviewBox">
+                <img src="/media/plugins/verified.png" alt="" />
+                <span> 4 reviews</span>
+            </div>
+        </div>
+        <div class="prodRate">
+            <span>₹220.00 <strike>₹250.00</strike></span>
+        </div>
+        <div class="prodBtns">
+            <a class="buyBtn" href="/shop/productDescp">Buy Now</a>
+            <a class="cartBtn">Add to cart</a>
+        </div>
+    </div>
+    <div class="products">
+        <img src="/media/plugins/dtan.jpg" alt="" class="prodImg" />
+        <h3 class="prodTitle">Neem Acne Free Cream</h3>
+        <div class="prodReview">
+            <span>⭐4.5 | </span>
+            <div class="reviewBox">
+                <img src="/media/plugins/verified.png" alt="" />
+                 4 reviews
+            </div>
+        </div>
+        <div class="prodRate">
+            <span>₹220.00 <strike>₹250.00</strike></span>
+        </div>
+        <div class="prodBtns">
+            <a class="buyBtn" href="/shop/productDescp">Buy Now</a>
+            <a class="cartBtn">Add to cart</a>
+        </div>
+    </div>
+    <div class="products">
+        <img src="/media/plugins/onionoil.jpg" alt="" class="prodImg" />
+        <h3 class="prodTitle">Neem Acne Free Cream</h3>
+        <div class="prodReview">
+            <span>⭐4.5 | </span>
+            <div class="reviewBox">
+                <img src="/media/plugins/verified.png" alt="" />
+                 4 reviews
+            </div>
+        </div>
+        <div class="prodRate">
+            <span>₹220.00 <strike>₹250.00</strike></span>
+        </div>
+        <div class="prodBtns">
+            <a class="buyBtn" href="/shop/productDescp">Buy Now</a>
+            <a class="cartBtn">Add to cart</a>
+        </div>
+    </div>
+    <div class="products">
+        <img src="/media/plugins/ricescrub.jpg" alt="" class="prodImg" />
+        <h3 class="prodTitle">Neem Acne Free Cream</h3>
+        <div class="prodReview">
+            <span>⭐4.5 | </span>
+            <div class="reviewBox">
+                <img src="/media/plugins/verified.png" alt="" />
+                 4 reviews
+            </div>
+        </div>
+        <div class="prodRate">
+            <span>₹220.00 <strike>₹250.00</strike></span>
+        </div>
+        <div class="prodBtns">
+            <a class="buyBtn" href="/shop/productDescp">Buy Now</a>
+            <a class="cartBtn">Add to cart</a>
+        </div>
+    </div>
+  </div>
+{% endblock  %}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html oncontextmenu="return false" lang="en">
+<!-- <html oncontextmenu="return false" lang="en"> -->
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,9 +10,23 @@
     <style>
         /* Navbar */
 
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
         :root{
             --theme:#475D44;
             --focus:#344232;
+        }
+
+        body{
+            overflow-x: hidden;
+        }
+
+        #navbar{
+            background: white;
+            z-index: 100;
         }
 
         .searchMenu img{
@@ -187,6 +202,114 @@
             width: 2rem;
             margin: 0 0.5rem;
         }
+
+        /* Common CSS */
+
+        .headMessage{
+            font-weight: 500;
+            font-size: 40px;
+            line-height: 48px;
+            text-align: center;
+            max-width: 49rem;
+            margin: 5rem auto;
+        }
+
+        .headMessage span{
+            color: var(--theme);
+        }
+
+        .all_prods{
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+
+    .products{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid;
+      padding: 1rem;
+      border-radius: 5px;
+    }
+
+    .prodImg{
+      width:10.7137rem;
+      mix-blend-mode: darken;
+    }
+
+    .prodTitle{
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 23px;
+    }
+
+    .prodReview{
+      display: flex;
+    }
+
+    .prodReview > span{
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 16px;
+      display: flex;
+      align-items: center;
+    }
+
+    .reviewBox{
+      display: flex;
+      align-items: center;
+    }
+
+    .reviewBox img{
+      width: 0.7531rem;
+      height: 0.7388rem;
+    }
+
+    .prodBtns{
+      margin-top: 1rem;
+    }
+
+    .buyBtn{
+      background: var(--theme);
+      color: white;
+      border-radius: 0;
+      border: 2px solid var(--theme);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    .buyBtn:hover{
+      color: white;
+      background: var(--theme);
+    }
+
+    .buyBtn:active{
+      background: var(--focus);
+      border: 2px solid var(--focus);
+    }
+
+    .cartBtn{
+      border: 2px solid var(--theme);
+      border-radius: 0;
+      color: var(--theme);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      background: white;
+    }
+
+    .moreBtn{
+      margin: 5rem 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .cartBtn:active{
+      background-color: rgb(216 216 216 / 57%);
+    }
+
     </style>
     {% block css %}
     {% endblock  %}
@@ -194,7 +317,7 @@
 <body>
     <!-- Navbar -->
 
-    <nav class="navbar navBar navbar-expand-lg">
+    <nav class="navbar navBar navbar-expand-lg" id="navbar">
         <div class="container-fluid">
           <div class="d-flex">
               <a class="navbar-brand brandName" href="#">
@@ -216,13 +339,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mb-lg-0 navItems">
               <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link" href="#landingpage">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Shop</a>
+                <a class="nav-link" href="/shop">Shop</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Services</a>
@@ -231,7 +354,7 @@
                 <a class="nav-link" href="#">Career</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Contact Us</a>
+                <a class="nav-link" href="#contactus">Contact Us</a>
               </li>
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle userBtn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/media/plugins/userAdmin.png" alt="" /></a>
@@ -250,7 +373,7 @@
 
     <!-- Footer -->
 
-    <div class='footer'>
+    <div class='footer' id="contactus">
         <div class="footerUpbox">
             <div class="footerBoxes">
                 <h2 class="linkHeadingsFooter">Product</h2>
