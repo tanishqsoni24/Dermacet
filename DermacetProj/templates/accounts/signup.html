@@ -1,0 +1,17 @@
+{% extends 'accounts/base.html' %}
+
+{% block fields %}
+
+<input type="text" style="margin-top: 0.5rem;" placeholder="Full Name" required>
+<input type="email" style="margin-top: 0.5rem;" placeholder="Email" required>
+<input type="password" style="margin-top: 0.5rem;" placeholder="Password" required>
+<input type="password" style="margin: 0.5rem 0 1rem 0;" placeholder="Confirm Password" required>
+{% endblock %}
+
+{% block authAs %}
+Sign Up
+{% endblock %}
+
+{% block authenticateAs %}
+Sign Up
+{% endblock %}

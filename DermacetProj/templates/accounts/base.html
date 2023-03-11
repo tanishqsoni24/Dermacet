@@ -1,0 +1,108 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+<style>
+
+    .authentication{
+        display: flex;
+        /* border: 2px solid red; */
+    }
+
+    .leftContainer img{
+        width: 48rem;
+    }
+    
+    .authenticateBox{
+        background: #F9F9F9;
+        /* border: 2px solid red; */
+        padding: 1rem 2rem;
+        width: 23vw;
+        margin-top: 2rem;
+        border-radius: 5px;
+    }
+
+    .topBox{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .topBox img{
+        width: 6rem;
+        margin-top: 0.5rem;
+    }
+
+    .topBox span{
+        margin-top: 1rem;
+        font-size: larger;
+    }
+
+    .authenticateFields{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .authenticateFields input{
+        margin-top: 1.5rem;
+        padding: 0.5rem;
+        border: none;
+        outline: none;
+        border-bottom: 2px solid var(--theme);
+        background: transparent;
+    }
+
+    .recoverPwd a{
+        float: right;
+        padding: 1rem 0rem;
+        color: var(--theme);
+        text-decoration: none;        
+        font-weight: 700;
+    }
+
+    .authByGoogle{
+        margin: auto;
+    }
+
+    .authenticate{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .authenticate span{
+        margin: 0.5rem auto;
+    }
+
+    .authByGoogle img{
+        width: 2rem;
+    }
+</style>
+{% endblock  %}
+
+{% block start %}
+    <div class="authentication container">
+        <div class="leftContainer">
+            <img src="/media/plugins/signupGirl.png" alt="">
+        </div>
+        <div class="rightContainer">
+            <div class="authenticateBox container">
+                <div class="topBox">
+                    <img src="/media/plugins/DermacetLogoUpdated.png" alt="">
+                    <span>Welcome To Dermacet</span>
+                </div>
+                <form action="" class="authForm">
+                    <div class="authenticateFields">
+                        {% block fields %}{% endblock %}
+                    </div>
+                    <div class="authenticate">
+                        <button class="buyBtn">{% block authAs %}{% endblock %}</button>
+                        <span>or</span>
+                        <div class="authByGoogle">
+                            <img src="/media/plugins/googleIcon.png" alt="">{% block authenticateAs %}{% endblock %} with Google
+                        </div>
+                    </div>
+                </form>
+                {% block authOptions %}{% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock  %}
