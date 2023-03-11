@@ -1,0 +1,19 @@
+{% extends 'accounts/base.html' %}
+
+{% block fields %}
+
+<input type="email" placeholder="Email" required>
+<input type="password" placeholder="Password" required>
+<div class="recoverPwd">
+    <a href="#">Forgot Password?</a>                    
+</div>
+
+{% endblock %}
+
+{% block authAs %}
+Login
+{% endblock %}
+
+{% block authenticateAs %}
+Login
+{% endblock %}
