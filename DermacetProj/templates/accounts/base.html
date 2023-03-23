@@ -89,12 +89,13 @@
                     <img src="/media/plugins/DermacetLogoUpdated.png" alt="">
                     <span>Welcome To Dermacet</span>
                 </div>
-                <form action="" class="authForm">
+                <form method="post" class="authForm"> {% csrf_token %}
+                    {% include 'base/alert.html' %}
                     <div class="authenticateFields">
                         {% block fields %}{% endblock %}
                     </div>
                     <div class="authenticate">
-                        <button class="buyBtn">{% block authAs %}{% endblock %}</button>
+                        <button class="buyBtn" type="submit">{% block authAs %}{% endblock %}</button>
                         <span>or</span>
                         <div class="authByGoogle">
                             <img src="/media/plugins/googleIcon.png" alt="">{% block authenticateAs %}{% endblock %} with Google
