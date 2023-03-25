@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'detailView.apps.DetailviewConfig',
     'accounts.apps.AccountsConfig',
+    'shop.apps.ShopConfig',
     'rest_framework'
 ]
 
