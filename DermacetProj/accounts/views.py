@@ -39,9 +39,9 @@ def signup(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
         
-        user_obj = User.objects.filter(username = email)
+        user_obj = User.objects.filter(username = username)
         if user_obj.exists():
-            messages.error(request, "Email already exists")
+            messages.error(request, "Username already exists")
             return redirect("/accounts/signup")
         user_obj = User.objects.create_user(username=username, email=email, password=password, first_name=first_name, last_name=last_name)
         user_obj.set_password(password)

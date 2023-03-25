@@ -60,10 +60,13 @@
   <div class="sort_and_filter">
     <div class="filter">
         <span>ALL</span>
-        <span>HAIR</span>
+        {% for cat in category %}
+        <span>{{cat.cat_name}}</span>
+        {% endfor %}
+        <!-- <span>HAIR</span>
         <span>FACE</span>
         <span>BODY</span>
-        <span>BABY</span>
+        <span>BABY</span> -->
     </div>
     <div class="sort">
         <select name="" id="" class="sortby">
@@ -75,9 +78,10 @@
     </div>
   </div>
   <div class="all_prods allProducts">
+    {% for product in products %}
     <div class="products">
-        <img src="/media/plugins/pimple.jpg" alt="" class="prodImg" />
-        <h3 class="prodTitle">Neem Acne Free Cream</h3>
+        <img src="/media/{{product.product_images.first.image}}" alt="" class="prodImg" />
+        <h3 class="prodTitle">{{product.prod_name}}</h3>
         <div class="prodReview">
             <span>⭐4.5 | </span>
             <div class="reviewBox">
@@ -86,14 +90,15 @@
             </div>
         </div>
         <div class="prodRate">
-            <span>₹220.00 <strike>₹250.00</strike></span>
+            <span>₹{{product.price}} <strike>₹250.00</strike></span>
         </div>
         <div class="prodBtns">
-            <a class="buyBtn" href="/shop/productDescp">Buy Now</a>
+            <a class="buyBtn" href="{% url 'Product' product.slug %}">Buy Now</a>
             <a class="cartBtn">Add to cart</a>
         </div>
     </div>
-    <div class="products">
+    {% endfor %}
+    <!-- <div class="products">
         <img src="/media/plugins/dtan.jpg" alt="" class="prodImg" />
         <h3 class="prodTitle">Neem Acne Free Cream</h3>
         <div class="prodReview">
@@ -146,6 +151,6 @@
             <a class="buyBtn" href="/shop/productDescp">Buy Now</a>
             <a class="cartBtn">Add to cart</a>
         </div>
-    </div>
+    </div> -->
   </div>
 {% endblock  %}
