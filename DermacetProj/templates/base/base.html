@@ -356,6 +356,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="#contactus">Contact Us</a>
               </li>
+              {% if not user.is_authenticated %}
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle userBtn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/media/plugins/userAdmin.png" alt="" /></a>
                   <ul class="dropdown-menu">
@@ -363,6 +364,11 @@
                       <li><a class="dropdown-item" href="/accounts/signup">Sign Up</a></li>
                   </ul>
               </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link buyBtn" href="/accounts/logout">Logout</a>
+              </li>
+              {% endif %}
             </ul>
           </div>
         </div>
