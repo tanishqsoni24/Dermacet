@@ -10,7 +10,7 @@
         flex-wrap: wrap;
     }
 
-    .filter span{
+    .filter input{
         margin: 0 -1.5px;
         border-radius: 5px;
         padding: 0.5rem 1rem;
@@ -22,7 +22,7 @@
         line-height: 21px;
     }
 
-    .filter span:nth-child(1){
+    .selected{
         background-color: #DBE8E8;
     }
 
@@ -48,6 +48,10 @@
     .sortby > option:hover{
         background: var(--theme);
     }
+
+    .prod_list{
+        margin: 1rem;
+    }
 </style>
 
 {% endblock %}
@@ -57,16 +61,32 @@
   <h2 class="headMessage">
     Get Latest <span>Beauty-Products</span> out there in the Markets
   </h2>
+  {% if not query %}
   <div class="sort_and_filter">
     <div class="filter">
-        <span>ALL</span>
+        <input 
+            type="radio" 
+            id="ALL" 
+            onchange="get_category('ALL')" 
+            class="selected" 
+            {% if checked_category == cat.cat_name %}
+            checked
+            {% endif %}
+            name="category" 
+            value="ALL">
+        <label for="ALL">ALL</label>
         {% for cat in category %}
-        <span>{{cat.cat_name}}</span>
+        <input 
+            type="radio" 
+            id="{{cat.cat_name}}" 
+            onchange="get_category('{{ cat.cat_name }}')" 
+            name="category" 
+            {% if checked_category == cat.cat_name %}
+            checked
+            {% endif %}
+            value="{{cat.cat_name}}"> 
+        <label for="{{cat.cat_name}}">{{cat.cat_name}}</label>
         {% endfor %}
-        <!-- <span>HAIR</span>
-        <span>FACE</span>
-        <span>BODY</span>
-        <span>BABY</span> -->
     </div>
     <div class="sort">
         <select name="" id="" class="sortby">
@@ -77,9 +97,10 @@
         </select>
     </div>
   </div>
+  {% endif %}
   <div class="all_prods allProducts">
     {% for product in products %}
-    <div class="products">
+    <div class="products prod_list">
         <img src="/media/{{product.product_images.first.image}}" alt="" class="prodImg" />
         <h3 class="prodTitle">{{product.prod_name}}</h3>
         <div class="prodReview">
@@ -98,59 +119,10 @@
         </div>
     </div>
     {% endfor %}
-    <!-- <div class="products">
-        <img src="/media/plugins/dtan.jpg" alt="" class="prodImg" />
-        <h3 class="prodTitle">Neem Acne Free Cream</h3>
-        <div class="prodReview">
-            <span>⭐4.5 | </span>
-            <div class="reviewBox">
-                <img src="/media/plugins/verified.png" alt="" />
-                 4 reviews
-            </div>
-        </div>
-        <div class="prodRate">
-            <span>₹220.00 <strike>₹250.00</strike></span>
-        </div>
-        <div class="prodBtns">
-            <a class="buyBtn" href="/shop/productDescp">Buy Now</a>
-            <a class="cartBtn">Add to cart</a>
-        </div>
-    </div>
-    <div class="products">
-        <img src="/media/plugins/onionoil.jpg" alt="" class="prodImg" />
-        <h3 class="prodTitle">Neem Acne Free Cream</h3>
-        <div class="prodReview">
-            <span>⭐4.5 | </span>
-            <div class="reviewBox">
-                <img src="/media/plugins/verified.png" alt="" />
-                 4 reviews
-            </div>
-        </div>
-        <div class="prodRate">
-            <span>₹220.00 <strike>₹250.00</strike></span>
-        </div>
-        <div class="prodBtns">
-            <a class="buyBtn" href="/shop/productDescp">Buy Now</a>
-            <a class="cartBtn">Add to cart</a>
-        </div>
-    </div>
-    <div class="products">
-        <img src="/media/plugins/ricescrub.jpg" alt="" class="prodImg" />
-        <h3 class="prodTitle">Neem Acne Free Cream</h3>
-        <div class="prodReview">
-            <span>⭐4.5 | </span>
-            <div class="reviewBox">
-                <img src="/media/plugins/verified.png" alt="" />
-                 4 reviews
-            </div>
-        </div>
-        <div class="prodRate">
-            <span>₹220.00 <strike>₹250.00</strike></span>
-        </div>
-        <div class="prodBtns">
-            <a class="buyBtn" href="/shop/productDescp">Buy Now</a>
-            <a class="cartBtn">Add to cart</a>
-        </div>
-    </div> -->
   </div>
+  <script>
+    function get_category(category){
+        location.href = location.pathname + `?category=${category}`
+    }
+  </script>
 {% endblock  %}

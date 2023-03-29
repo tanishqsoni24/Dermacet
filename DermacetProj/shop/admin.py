@@ -2,7 +2,7 @@ from django.contrib import admin
 from shop.models import *
 
 # Register your models here.
-admin.site.register(Category)
+admin.site.register((Category,coupen, Newsletter))
 
 class ProductImageInline(admin.StackedInline):
     model = ProdImage
