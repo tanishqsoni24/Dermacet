@@ -1,0 +1,107 @@
+{% extends 'base/base.html' %}
+
+
+{% block css %}
+
+<style>
+
+    .hire-container{
+        background: #f7f7f7;
+        padding-bottom: 1rem;
+        border-radius: 7px;
+    }    
+
+    .hiring_top{
+        background: var(--theme);
+        color: white;
+        padding: 1rem;
+        border-radius: 7px 7px 0 0;
+    }
+
+    .hiring_para{
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hiring_para h3{
+        color: var(--theme);
+        text-align: center;
+    }
+
+    .hiring_para p{
+        text-align: center;
+    }
+
+</style>
+{% endblock %}
+
+{% block start %}
+<div class="form-box container p-5">
+    <div class="hire-container">
+    <div class="hiring_top">
+        <h1>Open Hiring</h1>
+    </div>
+    {% if not is_cv_uploaded %}
+    <div class="hiring_para">
+        <img src="/media/plugins/career-page-icon.png" alt="share-cv-logo">
+        <h3>We're Hiring!</h3>
+        <p>Join our dynamic team and embark on an exciting journey with endless opportunities for growth and development!</p>
+        <h5>Share Your CV with Our Team</h5>
+    </div>
+    <form method="post" enctype="multipart/form-data" class="row g-3 px-3"> {% csrf_token %}
+        <div class="col-md-12">
+            <label for="career_name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Enter Your Name" id="career_name">
+        </div>
+        <div class="col-md-12">
+            <label for="career_email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="career_email" name="email" placeholder="Enter Email">
+        </div>
+        <div class="col-md-12">
+            <label for="career_cv" class="form-label">Upload CV Here</label>
+            <input name="CV" class="form-control" type="file" id="career_cv">
+        </div>
+        <div class="col-12">
+            <input type="submit" class="buyBtn md-2" id="career_submit" value="Submit">
+        </div>
+  </form>
+    {% else %}
+
+    <div class="hiring_para">
+        <img src="/media/plugins/career-page-icon.png" alt="share-cv-logo">
+        <h3>Thank You!</h3>
+        <p>We've Already Recieved Your CV</p>
+        <!-- Have Doubts -->
+        <p>If you have submitted wrong Information or have any query please <a style="color: var(--theme); text-decoration: none;" href="/contactus">Contact Us</a></p>
+        <h5>Our Team will contact you soon.</h5>
+
+    </div>
+
+    {% endif %}
+  </div>
+</div>
+
+  <!-- MINE -->
+
+    <!-- <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+        <input required type="text" name="name" placeholder="Enter Your Name" id="">
+        <input required type="email" name="email" placeholder="Enter Email">
+        <label for="CV">Upload CV Here</label>
+        <input required name="CV" type="file" id="CV">
+        <input type="submit" id="career_submit" value="Submit">
+    </form> -->
+    <script>
+        document.getElementById("career_submit").addEventListener("click", function(event){
+            let name = document.getElementsByName("name")[0].value;
+            let email = document.getElementsByName("email")[0].value;
+            let CV = document.getElementsByName("CV")[0].value;
+            if(name == "" || email == "" || CV == ""){
+                alert("Please Fill All The Fields");
+                event.preventDefault();
+            }
+        });
+    </script>
+{% endblock %}
+

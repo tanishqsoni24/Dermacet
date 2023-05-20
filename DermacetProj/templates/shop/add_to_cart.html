@@ -1,0 +1,300 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+<style>
+
+.cart_start{
+    background: #EAEDED;
+    display: flex;
+    padding: 2rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /* height: 50vh; */
+}
+
+.cart_box{
+    background: white;
+    padding: 1rem;
+}
+
+.cart_heading{
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    border-bottom: 2px solid #D6D6D6;
+    align-items: center;
+}
+
+.cart_heading h2, .cart_heading h5{
+    color: var(--theme);
+}
+
+
+.product_img img{
+    width: 15rem;
+    mix-blend-mode: darken;
+}
+
+.prod_quantity_set{
+    display: flex;
+}
+
+.product_container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cart_body{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+
+.checkbox{
+    display: flex;
+    align-items: center;
+}
+
+.checkbox input{
+    height: 1rem;
+    width: 1rem;
+}
+
+.prod-title{
+    padding: 0.5rem 0;
+    margin: 1rem 0;
+    /* font-size: 2rem; */
+    /* font-family: 'Karla'; */
+    max-width: 40rem;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    /* line-height: 23px; */
+}
+
+.prod-title span{
+    padding: 0.5rem 0;
+    display: block;
+    font-size: 15px;
+    /* width: 2.5rem; */
+    color: var(--theme);
+    font-style: italic;
+}
+
+.quantityType{
+    border: 1px solid #D8D8D8;
+    margin: 5px 0;
+    user-select: none;
+    display: flex;
+}
+
+.quantityType span{
+    padding: 0 0.5rem;
+    cursor: pointer;
+}
+
+.quantityType span:hover{
+    background: #DBE8E8;
+}
+
+.quantityType input{
+    border: none;
+    outline: none;
+    width: 3rem;
+    text-align: center;
+}
+
+.quantityType input::-webkit-outer-spin-button, .quantityType input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
+.prod_price span{
+    font-weight: bold;
+    color: black;
+}
+
+.prod_price > span{
+    color: var(--theme);
+}
+
+.selection-box{
+    padding: 1rem;
+    background: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.selection-box span{
+    font-size: 1.6rem;
+}
+
+.proc-Btn{
+    border-radius: 5px;
+    margin: 1rem 0;
+}
+
+.coupen-box{
+    padding: 1rem;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.coupen-box label{
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.coupen-box input{
+    padding: 0.5rem 1rem;
+    outline: none;
+    background: #EAEDED;
+    border: none;
+    border-radius: 5px;
+}
+
+.prod_child{
+    margin: 0 0.5rem ;
+}
+
+.prod_child:nth-child(3){
+    border-left: 2px solid #D8D8D8;
+    text-decoration: none;
+    color: black;
+    padding: 0 0.5rem;
+}
+
+.side-boxes{
+    margin: 0.5rem 0;
+}
+
+</style>
+
+{% endblock %}
+
+{% block start %}
+
+<div class="cart_start">
+    <div class="cart_box" style="width: 70rem;">
+        <div class="cart_heading">
+            <h2>Your Wishlist ({{request.user.profile.get_cart_count}})</h2>
+            {% if request.user.profile.get_cart_count %}
+            <h5>Price</h5>
+            {% endif %}
+        </div>
+        {% if request.user.profile.get_cart_count %}
+        {% for cart_item in cart_items %}
+        <div class="cart_body">
+            <div class="product_container">
+                <div class="checkbox">
+                    <input type="checkbox" name="" id="">
+                </div>
+                <h2>{{ cart_item.product.product_images.url }}</h2>
+                <div class="product_img">
+                    <img src="{{ cart_item.product.product_images.first.image.url }}" alt="">
+                </div>
+                <div class="product_details">
+                    <h2 class="prod-title">
+                        {{ cart_item.product.prod_name }}
+                        {% if cart_item.product.product_available_count %}
+                        <span>
+                            In Stock    
+                        </span>
+                        {% else %}
+                        <span>
+                            Out of Stock
+                        </span>
+                        {% endif %}
+                    </h2>
+                    <div class="prod_quantity_set">
+                        <span class="prod_child">Quantity</span>
+                        <div class="quantityType prod_child">
+                            <span id="decrement">-</span>
+                            <input type="number" name="" id="productQuantity" value="1">
+                            <span id="increment" title="Add Quantity">+</span>
+                        </div><a href="{% url 'remove_cart' cart_item.uid %}" class="prod_child">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="prod_price">
+                <span><span>₹</span>{{ cart_item.product.price }}</span>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="empty-cart" style="display: flex; flex-direction: column; align-items: center;">
+            <h3>Your Cart is Empty</h3>
+            <img src="/media/plugins/bag.png" style="width: 10rem;" alt="">
+            <a href="/shop" class="buyBtn my-2" style="border-radius: 5px;">Continue Shopping</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="aside-box">
+        <div class="selection-box side-boxes">
+            <span>Subtotal ({{request.user.profile.get_cart_count}} Item): ₹ {% if cart_items and cart_items.0.cart.get_cart_total %}{{ cart_items.0.cart.get_cart_total }}{% else %}0{% endif %}</span>
+            <button class="btn buyBtn proc-Btn" id="rzp-button1" {% if not payment %} disabled style="background-color: #7d8d7b; color: white;" {% endif %} >Proceed To Buy</button>
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script>
+            var options = {
+                "key": "rzp_test_y7wskmOKr6CQAk", // Enter the Key ID generated from the Dashboard
+                "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Dermacet",
+                "description": "Make Purchases",
+                "image": "/media/plugins/DermacetLogoUpdated.png",
+                "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response){
+                    window.location.href = "http://127.0.0.1:8000/shop/success/?order_ID={{payment.id}}&amount={{payment.amount}}";
+                    alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature)
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response){
+                    alert(response.error.code);
+                    alert(response.error.description);
+                    alert(response.error.source);
+                    alert(response.error.step);
+                    alert(response.error.reason);
+                    alert(response.error.metadata.order_id);
+                    alert(response.error.metadata.payment_id);
+            });
+            document.getElementById('rzp-button1').onclick = function(e){
+                rzp1.open();
+                e.preventDefault();
+            }
+            </script>
+        </div>
+        <form method="post" class="coupen-box side-boxes">
+            {% csrf_token %}
+            {% include "base/alert.html" %}
+            <label for="coupen">Enter Coupen</label>
+            <input type="text" name="coupen" id="coupen" placeholder="Enter...">
+            <button type="submit" class="btn buyBtn proc-Btn">Apply</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById("increment").addEventListener("click", ()=>{
+        let presentNum = document.getElementById("productQuantity").value
+        document.getElementById("productQuantity").value = (Number(presentNum) + 1).toString();
+        Number(presentNum)<1?Number(presentNum):document.getElementById("productQuantity").setAttribute("value",document.getElementById("productQuantity").value)
+    })
+
+    document.getElementById("decrement").addEventListener("click", ()=>{
+        let presentNum = document.getElementById("productQuantity").value
+        document.getElementById("productQuantity").value = (Number(presentNum)<=1?Number(presentNum):Number(presentNum) - 1).toString();
+        Number(presentNum)<=1?Number(presentNum):document.getElementById("productQuantity").setAttribute("value",document.getElementById("productQuantity").value)
+    })
+</script>
+
+
+{% endblock  %}
