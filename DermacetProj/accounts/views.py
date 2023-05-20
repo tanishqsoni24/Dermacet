@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import login as auth_login
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import Profile
 
 def login(request):
@@ -29,7 +29,7 @@ def login(request):
 
         messages.warning(request, "Invalid Credentials")
         return redirect("/accounts/login")
-    return render(request, "accounts/login.html") 
+    return render(request, "accounts/login.html")
 
 def signup(request):
     if(request.method=="POST"):
@@ -65,3 +65,4 @@ def logout(request):
     auth_logout(request)
     messages.success(request, "Logged Out Successfully")
     return redirect("/accounts/login")
+    

@@ -90,6 +90,7 @@
         border: 1px solid #D8D8D8;
         margin: 5px 0;
         display: flex;
+        user-select: none;
     }
 
     .quantityType span{
@@ -121,6 +122,25 @@
         margin: 5px 0;
     }
 
+    .display-profile{
+        background-color: #efefef;
+        height: 3rem;
+    }
+
+    .message-username span{
+        border-radius: 5px;
+        background-color: #ebebeb;
+        padding: 0 0.5rem;
+    }
+
+    .message-text p{
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        border-radius: 0 5px 5px 5px;
+        background-color: #f7f7f7;
+        border: 1px solid #ebebeb;
+    }
+
 
 
 </style>
@@ -142,8 +162,8 @@
     </div>
     <div class="rightShop">
         <div class="topDescp">
-            <span class="location">Home &rarr; Shop &rarr; {{prodDescp.prod_name}}</span>
-            <span class="quantity">300ml</span>
+            <span class="location"> &rarr; Shop &rarr; {{prodDescp.prod_name}}</span>
+            <span class="quantity">{{prodDescp.prod_quantity}}ml</span>
         </div>
         <div class="fullDescp">
             <div class="prodTitle">
@@ -154,9 +174,9 @@
                 <div class="descpBox">
                     <h4>About this Item</h4>
                     <ul class="descriptionList">
-                        <li>Software included: Pre-Installed Office Home and Student 2021 with lifetime validity.</li>
-                        <li>Software included: Pre-Installed Office Home and Student 2021 with lifetime validity.</li>
-                        <li>Software included: Pre-Installed Office Home and Student 2021 with lifetime validity.</li>
+                        {% for description in prodDescp.description.all %}
+                        <li>{{description.prod_descp}}</li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="orderBox">
@@ -171,9 +191,8 @@
                             <input type="number" name="" id="productQuantity" value="1">
                             <span id="increment" title="Add Quantity">+</span>
                         </div>
-                        <div class="buttonBox">
-                            <button class="buyBtn">Buy Now</button>
-                            <button class="cartBtn">Add To Cart</button>
+                        <div class="buttonBox my-2">
+                            <a href="{% url 'cart' prodDescp.uid %}" class="buyBtn" style="text-align: center;">Add To Cart</a>
                         </div>
                     </form>
                 </div>
@@ -183,8 +202,46 @@
 
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="send-review">
+            <form method="post" class="row g-3"> {% csrf_token %}
+                <div class="col-md-12">
+                    <label for="review_content" class="form-label">Enter Review...</label>
+                    <input type="text" class="form-control " name="name" placeholder="Enter Review Here..." id="review_content">
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="button" class="cartBtn review-btns mx-2 md-2" id="review_cancel" style="display: none;">Cancel</button>
+                    <input type="submit" class="buyBtn review-btns md-2" id="review_submit" style="display: none;" value="Submit">
+                </div>
+          </form>
+        </div>
+        <div class="see-reviews">
+            <h3 class="my-3">Reviews (1)</h3>
+            <div class="full-message d-flex">
+                <div class="display-profile">
+                    <img src="/media/plugins/userAdmin.png" style="width: 3rem;" alt="user_image">
+                </div>
+                <div class="message-content mx-3">
+                    <div class="message-username"><b>@Tanishq Soni</b> <span>5.45 AM</span></div>
+                    <div class="message-text"><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, cumque esse nostrum quisquam ratione recusandae libero nemo commodi ullam laudantium totam quia nam praesentium dolorum expedita rerum placeat? Voluptates, est?</p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
+    document.getElementById('review_content').addEventListener('click', ()=>{
+        document.getElementById('review_cancel').style.display = 'inline';
+        document.getElementById('review_submit').style.display = 'inline';
+    });
+
+    document.getElementById('review_cancel').addEventListener('click', ()=>{
+        document.getElementById('review_cancel').style.display = 'none';
+        document.getElementById('review_submit').style.display = 'none';
+    });
+
     document.getElementById("increment").addEventListener("click", ()=>{
         let presentNum = document.getElementById("productQuantity").value
         document.getElementById("productQuantity").value = (Number(presentNum) + 1).toString();

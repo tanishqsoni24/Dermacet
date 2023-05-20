@@ -11,11 +11,17 @@
     }
 
     .filter input{
+        /* opacity: 0; */
+        display: none;
+    }
+    
+    .filter label{
         margin: 0 -1.5px;
         border-radius: 5px;
         padding: 0.5rem 1rem;
         border: 2px solid #BBBBBB;
         font-family: 'Inter';
+        cursor: pointer;
         font-style: normal;
         font-weight: 500;
         font-size: 17px;
@@ -68,13 +74,14 @@
             type="radio" 
             id="ALL" 
             onchange="get_category('ALL')" 
-            class="selected" 
             {% if checked_category == cat.cat_name %}
             checked
             {% endif %}
             name="category" 
             value="ALL">
-        <label for="ALL">ALL</label>
+        <label for="ALL" {% if checked_category == cat.cat_name %}
+        class="selected"
+        {% endif %}>ALL</label>
         {% for cat in category %}
         <input 
             type="radio" 
@@ -85,7 +92,11 @@
             checked
             {% endif %}
             value="{{cat.cat_name}}"> 
-        <label for="{{cat.cat_name}}">{{cat.cat_name}}</label>
+        <label
+        for="{{cat.cat_name}}"
+        {% if checked_category == cat.cat_name %}
+        class="selected" 
+        {% endif %}>{{cat.cat_name}}</label>
         {% endfor %}
     </div>
     <div class="sort">
@@ -115,7 +126,7 @@
         </div>
         <div class="prodBtns">
             <a class="buyBtn" href="{% url 'Product' product.slug %}">Buy Now</a>
-            <a class="cartBtn">Add to cart</a>
+            <a href="{% url 'cart' product.uid %}" class="cartBtn">Add to cart</a>
         </div>
     </div>
     {% endfor %}

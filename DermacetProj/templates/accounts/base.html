@@ -17,7 +17,7 @@
         /* border: 2px solid red; */
         padding: 1rem 2rem;
         width: 23vw;
-        margin-top: 2rem;
+        margin-top: 3rem;
         border-radius: 5px;
     }
 
@@ -89,17 +89,14 @@
                     <img src="/media/plugins/DermacetLogoUpdated.png" alt="">
                     <span>Welcome To Dermacet</span>
                 </div>
-                <form method="post" class="authForm"> {% csrf_token %}
+                <form method="post" class="authForm"> {% csrf_token %}    
                     {% include 'base/alert.html' %}
+
                     <div class="authenticateFields">
                         {% block fields %}{% endblock %}
                     </div>
-                    <div class="authenticate">
+                    <div class="authenticate my-2">
                         <button class="buyBtn" type="submit">{% block authAs %}{% endblock %}</button>
-                        <span>or</span>
-                        <div class="authByGoogle">
-                            <img src="/media/plugins/googleIcon.png" alt="">{% block authenticateAs %}{% endblock %} with Google
-                        </div>
                     </div>
                 </form>
                 {% block authOptions %}{% endblock %}

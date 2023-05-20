@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+    <style>
+        .payment_container{
+            width: 25rem;
+            margin: 2rem auto;
+            background: #e3ffdf;
+        }
+
+        .payment-upper-body img{
+            width: 25rem;
+            border-radius: 14px 15px 0 0;
+        }
+
+        .payment-lower-body{
+            display: flex;
+            flex-direction: column;
+            /* border: 2px solid; */
+            align-items: center;
+        }
+
+        .payment-lower-body h6{
+            color: #3a5bff;
+        }
+
+        .hyphen-div{
+            border: 2px solid #d8dbd7;
+            width: 3rem;
+            margin: 0.5rem 0;
+            border-radius: 10px;
+        }
+
+        .pm-id{
+            color: #ababab;
+        }
+
+        .redirection{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .redBtn{
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block start %}
+
+<div class="container">
+    <div class="payment_container">
+        <div class="payment-upper-body">
+            <img src="/media/plugins/payment_successful.gif" alt="Payment-Successful-GIF">
+        </div>
+        <div class="payment-lower-body">
+            <h1>Rs. {{amount}}</h1>
+            <h6>Payment Successful</h6>
+            <span class="hyphen-div"></span>
+            <span class="pm-id">Order ID : {{order_id}}</span>
+            <p style="text-align: center;">Thank you for your purchase. Your order will be processed shortly.</p>
+        </div>
+        <div class="redirection">
+            <a class="buyBtn redBtn" href="/shop">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

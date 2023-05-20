@@ -17,12 +17,12 @@ class Category(BaseModel):
         return self.cat_name
 
 class Product(BaseModel):
-    prod_name = models.CharField(max_length=100)
+    prod_name = models.CharField(max_length=52)
     slug = models.SlugField(unique=True, null=True, blank=True)
     prod_quantity = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="products")
     price = models.IntegerField()
-    prod_descp = models.TextField()
+    product_available_count = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.prod_name)
@@ -31,15 +31,22 @@ class Product(BaseModel):
     def __str__(self):
         return self.prod_name
 
+class Product_Description(BaseModel):
+    prod_name = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='description')
+    prod_descp = models.TextField(blank=True)
+
 class ProdImage(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_images")
     image = models.ImageField(upload_to="product")
 
-class coupen(BaseModel):
+class Coupen(BaseModel):
     coupen_code = models.CharField(max_length=10)
     is_expired = models.BooleanField(default=False)
     discount_price = models.IntegerField(default=0)
     minimun_amount = models.IntegerField(default=200)
+
+# class Reviews(BaseModel):
+
 
 class Newsletter(BaseModel):
     email = models.EmailField()

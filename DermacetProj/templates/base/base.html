@@ -1,3 +1,5 @@
+{% load shop_extras %}
+
 <!DOCTYPE html>
 <!-- <html oncontextmenu="return false" lang="en"> -->
 <html lang="en">
@@ -7,6 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dermacet</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
+    {% if request.session.alert %}
+    <script>
+        alert("{% getAlert request %}");
+
+    </script>
+    {% endif %}
+
     <style>
         /* Navbar */
 
@@ -355,10 +365,10 @@
                 <a class="nav-link" href="#">Services</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Career</a>
+                <a class="nav-link" href="/career-page">Career</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#contactus">Contact Us</a>
+                <a class="nav-link" href="/contactus">Contact Us</a>
               </li>
               {% if not user.is_authenticated %}
               <li class="nav-item dropdown">
@@ -369,9 +379,17 @@
                   </ul>
               </li>
               {% else %}
-              <li class="nav-item">
-                <a class="nav-link buyBtn" href="/accounts/logout">Logout</a>
+              <li class="nav-item d-flex align-items-center mx-2">
+                <a title="View Cart" href="/shop/cart/"><img src="/media/plugins/cart.png" style="width: 2rem;" alt=""></a><span style="color: var(--theme);">({{request.user.profile.get_cart_count}})</span>
               </li>
+              <li class="nav-item">
+                <a class="nav-link mx-2 buyBtn" style="border-radius: 5px;" href="/accounts/logout">Logout</a>
+              </li>
+              {% if user.is_superuser %}
+              <li class="nav-item">
+                <a class="nav-link mx-2 cartBtn" target="_blank" style="border-radius: 5px;" href="/admin">Admin</a>
+              </li>
+              {% endif %}
               {% endif %}
             </ul>
           </div>
@@ -383,7 +401,7 @@
 
     <!-- Footer -->
 
-    <div class='footer' id="contactus">
+    <div class='footer'>
         <div class="footerUpbox">
             <div class="footerBoxes">
                 <h2 class="linkHeadingsFooter">Product</h2>
@@ -413,14 +431,13 @@
                 </div>
             </div>
             <form action="/shop/manageNewsLetter/" method='post' class="newsletterBox footerBoxes"> {% csrf_token %}
-                {% include 'base/alert.html' %}
-                <h3>Subscribe</h3>
+                <h3 style="color: black;">Subscribe</h3>
                 <div class="inputArea">
                     <input type="email" name="email" id="" placeholder='Your Email Here!' required/>
                     <button type="submit">
                         <img src="/media/plugins/sendArrow.png" alt="arrow" />
                     </button>
-                    <p class="newsletterDescp">
+                    <p class="newsletterDescp" style="color: black;">
                     Hello, we are Dermacet. Our goal is to develop the efficient skin care and body care products, combined institutional and home treatment to satisfy end users.
                     </p>
                 </div>
