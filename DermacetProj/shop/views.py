@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import login_required
 import razorpay
 from django.conf import settings
 
-
 # Create your views here.
 
 def shop(request):
