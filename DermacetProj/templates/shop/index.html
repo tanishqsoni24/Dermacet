@@ -63,11 +63,11 @@
 {% endblock %}
 
 {% block start %}
-
+{% include "base/alert.html" %}
+{% if not query %}
   <h2 class="headMessage">
     Get Latest <span>Beauty-Products</span> out there in the Markets
   </h2>
-  {% if not query %}
   <div class="sort_and_filter">
     <div class="filter">
         <input 
@@ -100,15 +100,37 @@
         {% endfor %}
     </div>
     <div class="sort">
-        <select name="" id="" class="sortby">
-            <option value="Ratings">Sort By</option>
-            <option value="Ratings">Ratings</option>
-            <option value="Price - High to Low">Price - High to Low</option>
-            <option value="Price - Low to High">Price - Low to High</option>
+        <select name="" id="" class="sortby" onchange="sort_products(this.value)">
+            {% if checked_sort == "Popularity" %}
+                <option value="Popularity">Popularity</option>
+                <option value="Default">Default</option>
+                <option value="Price - High to Low">Price - High to Low</option>
+                <option value="Price - Low to High">Price - Low to High</option>
+            {% elif checked_sort == "Price - High to Low" %}
+                <option value="Price - High to Low">Price - High to Low</option>
+                <option value="Default">Default</option>
+                <option value="Popularity">Popularity</option>
+                <option value="Price - Low to High">Price - Low to High</option>
+            {% elif checked_sort == "Price - Low to High" %}
+                <option value="Price - Low to High">Price - Low to High</option>
+                <option value="Default">Default</option>
+                <option value="Popularity">Popularity</option>
+                <option value="Price - High to Low">Price - High to Low</option>
+            {% else %}
+                <option value="Default">Sort By</option>
+                <option value="Popularity">Popularity</option>
+                <option value="Price - High to Low">Price - High to Low</option>
+                <option value="Price - Low to High">Price - Low to High</option>
+            {% endif %}
         </select>
     </div>
   </div>
+  {% else %}
+  <h2 class="headMessage">
+    Search Results for -  <span>"{{query}}"</span>
+  </h2>
   {% endif %}
+  {% if products|length %}
   <div class="all_prods allProducts">
     {% for product in products %}
     <div class="products prod_list">
@@ -118,7 +140,7 @@
             <span>⭐4.5 | </span>
             <div class="reviewBox">
                 <img src="/media/plugins/verified.png" alt="" />
-                <span> 4 reviews</span>
+                <span> {{ product.reviews.all|length }} reviews</span>
             </div>
         </div>
         <div class="prodRate">
@@ -131,9 +153,31 @@
     </div>
     {% endfor %}
   </div>
+    {% else %}
+    <div class="all_prods allProducts">
+        <h4>
+            No Matching Results Found!
+        </h4>
+    </div>
+    {% endif %}
   <script>
     function get_category(category){
         location.href = location.pathname + `?category=${category}`
+    }
+
+    function sort_products(sortby) {
+        const url = new URL(location.href);
+        const params = new URLSearchParams(url.search);
+
+        if (params.has('sortBy')) {
+            params.delete('sortBy');
+        }
+
+        params.append('sortBy', sortby);
+
+        url.search = params.toString();
+
+        location.href = url.toString();
     }
   </script>
 {% endblock  %}

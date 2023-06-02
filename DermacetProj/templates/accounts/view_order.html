@@ -1,0 +1,78 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block start %}
+    <div class="container">
+        <div class="row">
+            <div class="col checkout_cont">
+                <div class="delivery-box" method="post" style="padding-bottom: 1rem;"> {% csrf_token %}
+                    <h3 style="margin: 2rem 0; text-align: center;">Your<span style="color: var(--theme);"> Purchase</span></h3>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">QTY</th>
+                            <th scope="col">Subtotal</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart_item in cart_items %}
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>
+                                <img class="prodImg" style="width: 6rem;" src="{{ cart_item.product.product_images.first.image.url }}" alt="">
+                            </td>
+                            <td>{{ cart_item.product.prod_name }}</td>
+                            <td>{{cart_item.product.price}}</td>
+                            <td>{{cart_item.quantity}}</td>
+                            <td>{{ cart_item.get_subtotal }}/-</td>
+                          </tr>
+                            {% endfor %}
+                            {% if order.cart.coupen and minimum_amount < order.cart.payment_done_amount %}
+                            <tr>
+                                <th scope="row">Before Offer</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>{{quantity}}</th>
+                                <th>₹{{cart_total_without_coupon}}</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">Dicount</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>₹{{order.cart.coupen.discount_price}}</th>
+                            </tr>
+                            <tr>
+                                <th scope="row">Paid</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>{{quantity}}</th>
+                                <th>₹{{order.cart.payment_done_amount}}/-</th>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <th scope="row">Total</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>-</th>
+                                <th>{{quantity}}</th>
+                                <th>₹{{order.cart.payment_done_amount}}/-</th>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

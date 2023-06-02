@@ -506,7 +506,7 @@
 
 <!-- Service Level Page -->
 
-<div class="ServiceLvl">
+<div class="ServiceLvl" id="Services">
     <h2 class="headMessage"><span>Unleash </span>your inner beauty with our wide range of cosmetics.</h2>
     <div class="FourCards">
         <div class="serviceCards">
@@ -542,7 +542,7 @@
 
 <!-- About Us -->
 
-<section class="about-section">
+<section class="about-section" id="aboutus">
   <div class="container">
       <div class="row">                
           <div class="content-column col-lg-6 col-md-12 col-sm-12 order-2">
@@ -584,78 +584,26 @@
       Products
     </h2>
     <div class="all_prods">
+      {% for product in popular_products %}
       <div class="products">
-          <img src="/media/plugins/pimple.jpg" alt="" class="prodImg" />
-          <h3 class="prodTitle">Neem Acne Free Cream</h3>
+          <img src="/media/{{product.product_images.first.image}}" alt="popular_products_image" class="prodImg" />
+          <h3 class="prodTitle">{{product.prod_name}}</h3>
           <div class="prodReview">
               <span>⭐4.5 | </span>
               <div class="reviewBox">
                   <img src="/media/plugins/verified.png" alt="" />
-                  <span> 4 reviews</span>
+                  <span> {{ product.reviews.all|length }} reviews</span>
               </div>
           </div>
           <div class="prodRate">
-              <span>₹220.00 <strike>₹250.00</strike></span>
+              <span>₹{{product.price}}<strike>₹250.00</strike></span>
           </div>
           <div class="prodBtns">
-              <a class="buyBtn">Buy Now</a>
-              <a class="cartBtn">Add to cart</a>
+              <a href="{% url 'Product' product.slug %}" class="buyBtn">Buy Now</a>
+              <a href="{% url 'cart' product.uid %}" class="cartBtn">Add to cart</a>
           </div>
       </div>
-      <div class="products">
-          <img src="/media/plugins/dtan.jpg" alt="" class="prodImg" />
-          <h3 class="prodTitle">Neem Acne Free Cream</h3>
-          <div class="prodReview">
-              <span>⭐4.5 | </span>
-              <div class="reviewBox">
-                  <img src="/media/plugins/verified.png" alt="" />
-                   4 reviews
-              </div>
-          </div>
-          <div class="prodRate">
-              <span>₹220.00 <strike>₹250.00</strike></span>
-          </div>
-          <div class="prodBtns">
-              <a class="buyBtn">Buy Now</a>
-              <a class="cartBtn">Add to cart</a>
-          </div>
-      </div>
-      <div class="products">
-          <img src="/media/plugins/onionoil.jpg" alt="" class="prodImg" />
-          <h3 class="prodTitle">Neem Acne Free Cream</h3>
-          <div class="prodReview">
-              <span>⭐4.5 | </span>
-              <div class="reviewBox">
-                  <img src="/media/plugins/verified.png" alt="" />
-                   4 reviews
-              </div>
-          </div>
-          <div class="prodRate">
-              <span>₹220.00 <strike>₹250.00</strike></span>
-          </div>
-          <div class="prodBtns">
-              <a class="buyBtn">Buy Now</a>
-              <a class="cartBtn">Add to cart</a>
-          </div>
-      </div>
-      <div class="products">
-          <img src="/media/plugins/ricescrub.jpg" alt="" class="prodImg" />
-          <h3 class="prodTitle">Neem Acne Free Cream</h3>
-          <div class="prodReview">
-              <span>⭐4.5 | </span>
-              <div class="reviewBox">
-                  <img src="/media/plugins/verified.png" alt="" />
-                   4 reviews
-              </div>
-          </div>
-          <div class="prodRate">
-              <span>₹220.00 <strike>₹250.00</strike></span>
-          </div>
-          <div class="prodBtns">
-              <a class="buyBtn">Buy Now</a>
-              <a class="cartBtn">Add to cart</a>
-          </div>
-      </div>
+      {% endfor %}
     </div>
     <div class="moreBtn">
       <a href="/shop" class="cartBtn" >See All</a>

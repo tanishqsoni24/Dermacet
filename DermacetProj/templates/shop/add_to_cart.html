@@ -176,7 +176,7 @@
 {% endblock %}
 
 {% block start %}
-
+{% include "base/alert.html" %}
 <div class="cart_start">
     <div class="cart_box" style="width: 70rem;">
         <div class="cart_heading">
@@ -189,9 +189,6 @@
         {% for cart_item in cart_items %}
         <div class="cart_body">
             <div class="product_container">
-                <div class="checkbox">
-                    <input type="checkbox" name="" id="">
-                </div>
                 <h2>{{ cart_item.product.product_images.url }}</h2>
                 <div class="product_img">
                     <img src="{{ cart_item.product.product_images.first.image.url }}" alt="">
@@ -211,11 +208,13 @@
                     </h2>
                     <div class="prod_quantity_set">
                         <span class="prod_child">Quantity</span>
-                        <div class="quantityType prod_child">
-                            <span id="decrement">-</span>
-                            <input type="number" name="" id="productQuantity" value="1">
-                            <span id="increment" title="Add Quantity">+</span>
-                        </div><a href="{% url 'remove_cart' cart_item.uid %}" class="prod_child">Delete</a>
+                        <form method="post" action="{% url 'update_cart_quantity' cart_item.uid %}" class="quantityType prod_child"> {% csrf_token %}
+                            <span id="decrement_{{cart_item.uid}}">-</span>
+                            <input type="number" name="quantity" id="productQuantity_{{cart_item.uid}}" value="{{cart_item.quantity}}">
+                            <span id="increment_{{cart_item.uid}}" title="Add Quantity">+</span>
+                            <button style="padding: 0 0.5rem; margin: 0; background: var(--theme); color: white; border: 2px solid var(--theme);" type="submit" class="prod_child">Set</button>
+                        </form>
+                        <a href="{% url 'remove_cart' cart_item.uid %}" class="prod_child">Delete</a>
                     </div>
                 </div>
             </div>
@@ -233,66 +232,76 @@
         {% endif %}
     </div>
     <div class="aside-box">
-        <div class="selection-box side-boxes">
+        <form method="post" class="selection-box side-boxes"> {% csrf_token %}
+            <input name="cost_of_cart" type="hidden" value="{% if cart_items and cart_items.0.cart.get_cart_total %}{{ cart_items.0.cart.get_cart_total }}{% else %}0{% endif %}">
             <span>Subtotal ({{request.user.profile.get_cart_count}} Item): ₹ {% if cart_items and cart_items.0.cart.get_cart_total %}{{ cart_items.0.cart.get_cart_total }}{% else %}0{% endif %}</span>
-            <button class="btn buyBtn proc-Btn" id="rzp-button1" {% if not payment %} disabled style="background-color: #7d8d7b; color: white;" {% endif %} >Proceed To Buy</button>
-            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-            <script>
-            var options = {
-                "key": "rzp_test_y7wskmOKr6CQAk", // Enter the Key ID generated from the Dashboard
-                "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                "currency": "INR",
-                "name": "Dermacet",
-                "description": "Make Purchases",
-                "image": "/media/plugins/DermacetLogoUpdated.png",
-                "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                "handler": function (response){
-                    window.location.href = "http://127.0.0.1:8000/shop/success/?order_ID={{payment.id}}&amount={{payment.amount}}";
-                    alert(response.razorpay_payment_id);
-                    alert(response.razorpay_order_id);
-                    alert(response.razorpay_signature)
-                },
-                "theme": {
-                    "color": "#3399cc"
-                }
-            };
-            var rzp1 = new Razorpay(options);
-            rzp1.on('payment.failed', function (response){
-                    alert(response.error.code);
-                    alert(response.error.description);
-                    alert(response.error.source);
-                    alert(response.error.step);
-                    alert(response.error.reason);
-                    alert(response.error.metadata.order_id);
-                    alert(response.error.metadata.payment_id);
-            });
-            document.getElementById('rzp-button1').onclick = function(e){
-                rzp1.open();
-                e.preventDefault();
-            }
-            </script>
-        </div>
+            <button  class="btn buyBtn proc-Btn" id="proc-to-buy" >Proceed To Buy</button>
+        </form>
         <form method="post" class="coupen-box side-boxes">
             {% csrf_token %}
-            {% include "base/alert.html" %}
-            <label for="coupen">Enter Coupen</label>
+            {% if cart.coupen %}
+                {% if cart.coupen.minimun_amount >  cart_items.0.cart.get_cart_total %}
+                <span style="color: red;">*Minimum Amount for applying of coupon is {{cart.coupen.minimun_amount}}*</span>
+                <label for="coupen">Enter Coupen <a id="remove_coupon" href="{% url 'remove_coupon' cart.coupen.uid %}" style="background: green; color: white;" class="btn">{{cart.coupen.coupen_code}} &nbsp; &nbsp; X</a></label> 
+                {% else %}
+                <label for="coupen">Enter Coupen <a id="remove_coupon" href="{% url 'remove_coupon' cart.coupen.uid %}" style="background: green; color: white;" class="btn">{{cart.coupen.coupen_code}} &nbsp; &nbsp; X</a></label> 
+                {% endif %}
+            {% else %}
+            <label for="coupen">Enter Coupen </label>
+            {% endif %}
             <input type="text" name="coupen" id="coupen" placeholder="Enter...">
-            <button type="submit" class="btn buyBtn proc-Btn">Apply</button>
+            <button type="submit" id="coupen_submit" class="btn buyBtn proc-Btn">Apply</button>
+
         </form>
     </div>
 </div>
 
+{% if request.user.profile.get_cart_count %}
+{% for cart_item in cart_items %}
 <script>
-    document.getElementById("increment").addEventListener("click", ()=>{
-        let presentNum = document.getElementById("productQuantity").value
-        document.getElementById("productQuantity").value = (Number(presentNum) + 1).toString();
-        Number(presentNum)<1?Number(presentNum):document.getElementById("productQuantity").setAttribute("value",document.getElementById("productQuantity").value)
+    document.getElementById("increment_{{cart_item.uid}}").addEventListener("click", ()=>{
+        let presentNum = document.getElementById("productQuantity_{{cart_item.uid}}").value
+        document.getElementById("productQuantity_{{cart_item.uid}}").value = (Number(presentNum) + 1).toString();
+        Number(presentNum)<1?Number(presentNum):document.getElementById("productQuantity_{{cart_item.uid}}").setAttribute("value",document.getElementById("productQuantity_{{cart_item.uid}}").value)
     })
 
-    document.getElementById("decrement").addEventListener("click", ()=>{
-        let presentNum = document.getElementById("productQuantity").value
-        document.getElementById("productQuantity").value = (Number(presentNum)<=1?Number(presentNum):Number(presentNum) - 1).toString();
-        Number(presentNum)<=1?Number(presentNum):document.getElementById("productQuantity").setAttribute("value",document.getElementById("productQuantity").value)
+    document.getElementById("decrement_{{cart_item.uid}}").addEventListener("click", ()=>{
+        let presentNum = document.getElementById("productQuantity_{{cart_item.uid}}").value
+        document.getElementById("productQuantity_{{cart_item.uid}}").value = (Number(presentNum)<=1?Number(presentNum):Number(presentNum) - 1).toString();
+        Number(presentNum)<=1?Number(presentNum):document.getElementById("productQuantity_{{cart_item.uid}}").setAttribute("value",document.getElementById("productQuantity_{{cart_item.uid}}").value)
+    })
+</script>
+{% endfor %}
+{% endif %}
+
+<script>
+    let coupen_submit = document.getElementById("coupen_submit").addEventListener("click", (event)=>{
+        let coupen = document.getElementById("coupen").value;
+        if (coupen==""){
+            alert("Please Enter Coupen")
+            event.preventDefault()
+        }
+    })
+
+
+    let proc_to_buy = document.getElementById("proc-to-buy").addEventListener("click", (event)=>{
+        let cost_of_cart = document.getElementsByName("cost_of_cart")[0].value;
+        if (cost_of_cart==0){
+            alert("Please Add Items to Cart")
+            event.preventDefault()
+        }
+
+        if (cost_of_cart != {% if cart_items and cart_items.0.cart.get_cart_total %}{{ cart_items.0.cart.get_cart_total }}{% else %}0{% endif %}){
+            alert("You can't change the amount of Cart")
+            event.preventDefault()
+        }
+    })
+
+    document.getElementById("remove_coupon").addEventListener("click", (event)=>{
+        let decision = confirm("Are you sure you want to remove the coupon?")
+        if (decision==false){
+            event.preventDefault()
+        }
     })
 </script>
 

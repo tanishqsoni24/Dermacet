@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'detailView.apps.DetailviewConfig',
     'accounts.apps.AccountsConfig',
     'shop.apps.ShopConfig',
-    'rest_framework'
+    'rest_framework',
+    'pdf_convert.apps.PdfConvertConfig',
 ]
 
 MIDDLEWARE = [
@@ -112,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 

@@ -1,0 +1,319 @@
+{% extends 'base/base.html' %}
+
+{% block css %}
+<style>
+
+    .delivery_cont{
+        box-shadow: 0px 0px 10px 0px #cbcbc361;
+        margin: 4rem 0;
+        padding: 1rem;
+    }
+
+    .fields{
+        /* display: flex;
+    justify-content: space-between;
+    align-items: baseline; */
+    border: 1px solid #ededed;
+    margin: 1rem 0;
+    padding: 0.5rem 0.5rem;
+    }
+
+    .fields input{
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        outline: none;
+        border: 1px solid #cbcbc3;
+    }
+
+    .checkout_cont{
+        box-shadow: 0px 0px 10px 0px #cbcbc361;
+        margin: 4rem 0;
+    }
+
+    .order_status{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .status_logo{
+        width: 5rem;
+    }
+
+    .success_label{
+        display: inline;
+        color: green;
+    }
+    
+    .pending_label{
+        display: inline;
+        color: #717171;
+    }
+
+    .present_label{
+        display: inline;
+        color: black;
+    }
+
+    .bRadius5{
+        border-radius: 5px;
+    }
+</style>
+
+{% endblock %}
+
+{% block start %}
+
+{% include "base/alert.html" %}
+<div class="container mt-5">
+    <div class="row justify-content-around">
+        <div class="col-4 order_status">
+            <img class="status_logo" src="/media/plugins/success.png" alt="succes-png"><h2 class="success_label">Cart Selected</h2>
+        </div>
+        <div class="col-4 order_status">
+            {% if cart.city %}
+            <img class="status_logo" src="/media/plugins/success.png" alt="succes-png"> <h2 class="success_label">Submit Deliver Details</h2>
+            {% else %}
+            <img class="status_logo" src="/media/plugins/present_pending.png" alt="succes-png"> <h2 class="present_label">Submit Deliver Details</h2>
+            {% endif %}
+        </div>
+        <div class="col-4 order_status">
+            <img class="status_logo" src="/media/plugins/pending.png" alt="succes-png"> <h2 class="pending_label">Payment</h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="delivery_cont">
+        <h3 style="margin: 2rem 0; text-align: center;"><span style="color: var(--theme);">Your Package, Your Way</span> Secure and Seamless Delivery Details</h3>
+        <form class="delivery-box" method="post"> {% csrf_token %}
+            <div class="fields">
+                <label class="form-label" for="first_name">First Name*</label>
+                {% if cart.first_name %}
+                <input class="form-control"type="text" value="{{cart.first_name}}" name="first_name" id="first_name" placeholder="First Name">
+                {% else %}
+                <input class="form-control"type="text" value="{{user.first_name}}" name="first_name" id="first_name" placeholder="First Name">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="last_name">Last Name*</label>
+                {% if cart.last_name %}
+                <input class="form-control"type="text" value="{{cart.last_name}}" name="last_name" id="last_name" placeholder="Last Name">
+                {% else %}
+                <input class="form-control"type="text" value="{{user.last_name}}" name="last_name" id="last_name" placeholder="Last Name">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="email">Email*</label>
+                {% if cart.email %}
+                <input class="form-control"type="email" value="{{cart.email}}" name="email" id="email" placeholder="Email">
+                {% else %}
+                <input class="form-control"type="email" value="{{user.email}}" name="email" id="email" placeholder="Email">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="phone">Phone*</label>
+                {% if cart.phone %}
+                <input class="form-control"type="text" value="{{cart.phone}}" name="phone" id="phone" placeholder="Phone">
+                {% else %}
+                <input class="form-control"type="text" name="phone" id="phone" placeholder="Phone">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="phone">Phone 2</label>
+                {% if cart.phone2 %}
+                <input class="form-control"type="text" value="{{cart.phone2}}" name="phone" id="phone" placeholder="Phone">
+                {% else %}
+                <input class="form-control"type="text" name="phone2" id="phone" placeholder="Phone">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="address">Address*</label>
+                {% if cart.address %}
+                <input class="form-control"type="text" value="{{cart.address}}" name="address" id="address" placeholder="Address">
+                {% else %}
+                <input class="form-control"type="text" name="address" id="address" placeholder="Address">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="address">Address 2</label>
+                {% if cart.address2 %}
+                <input class="form-control"type="text" value="{{cart.address2}}" name="address" id="address" placeholder="Address">
+                {% else %}
+                <input class="form-control"type="text" name="address2" id="address" placeholder="Address">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="city">City*</label>
+                {% if cart.city %}
+                <input class="form-control"type="text" value="{{cart.city}}" name="city" id="city" placeholder="City">
+                {% else %}
+                <input class="form-control"type="text" name="city" id="city" placeholder="City">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="state">State*</label>
+                {% if cart.state %}
+                <input class="form-control"type="text" value="{{cart.state}}" name="state" id="state" placeholder="State">
+                {% else %}
+                <input class="form-control"type="text" name="state" id="state" placeholder="State">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="pincode">Pincode*</label>
+                {% if cart.pincode %}
+                <input class="form-control"type="text" value="{{cart.pincode}}" name="pincode" id="pincode" placeholder="Pincode">
+                {% else %}
+                <input class="form-control"type="text" name="pincode" id="pincode" placeholder="Pincode">
+                {% endif %}
+            </div>
+            <div class="fields">
+                <label class="form-label" for="country">Country*</label>
+                {% if cart.country %}
+                <input class="form-control"type="text" value="{{cart.country}}" name="country" id="country" placeholder="Country">
+                {% else %}
+                <input class="form-control"type="text" name="country" id="country" placeholder="Country">
+                {% endif %}
+            </div>
+            <input type="hidden" name="cost_of_cart_update" value="{{cost_of_cart}}">
+            {% if cart.city %}
+            <input type="submit" style="border-radius: 5px;" class="buyBtn" value="Update">
+            {% else %}
+            <input type="submit" style="border-radius: 5px;" class="buyBtn" value="Submit">
+            {% endif %}
+        </form>
+    </div>
+    <div class="row">
+        <div class="col checkout_cont">
+            <form class="delivery-box" method="post" style="padding-bottom: 1rem;"> {% csrf_token %}
+                <h3 style="margin: 2rem 0; text-align: center;">Review &<span style="color: var(--theme);"> Purchase</span></h3>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Product</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">QTY</th>
+                        <th scope="col">Review</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for cart_item in cart_items %}
+                        {% if cart_item.product.product_available_count > 0 %}
+                      <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>
+                            <img class="prodImg" style="width: 6rem;" src="{{ cart_item.product.product_images.first.image.url }}" alt="">
+                        </td>
+                        <td>{{ cart_item.product.prod_name }}</td>
+                        <td>{{cart_item.product.price}}</td>
+                        <td>{{cart_item.quantity}}</td>
+                        <td>{{ cart_item.get_subtotal }}/-</td>
+                      </tr>
+                        {% endif %}
+                        {% endfor %}
+                        {% if cart.coupen and cart.coupen.minimun_amount <  cart_items.0.cart.get_cart_total %}
+                        <tr>
+                            <th scope="row">Before Offer</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>{{request.user.profile.get_cart_count}}</th>
+                            <th>₹{{cost_of_cart_without_coupon}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Coupon Discount</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>- ₹{{cart.coupen.discount_price}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="row">Total</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>{{request.user.profile.get_cart_count}}</th>
+                            <th>₹{{cart.get_cart_total}}/-</th>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <th scope="row">Total</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>-</th>
+                            <th>{{request.user.profile.get_cart_count}}</th>
+                            <th>₹{{cost_of_cart}}/-</th>
+                        </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+                <input type="submit" value="Proceed to Payment ₹{{cost_of_cart}}/-" class="buyBtn bRadius5" name="" id="rzp-button1">
+            </form>
+            <form style="display: none;" id="success_form" method="post" action="/shop/success/"> {% csrf_token %}
+                <input type="hidden" id="orderId_of_cart" name="order_ID" value="{{payment.id}}">
+                <input type="hidden" id="cost_of_cart" name="amount" value="{{payment.amount}}">
+                <input type="hidden" id="payment_id" name="payment_id">
+                <input type="hidden" id="payment_signature" name="signature">
+            </form>
+            {% if payment or cart.city %}
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script>
+            var options = {
+                "key": "rzp_test_y7wskmOKr6CQAk", // Enter the Key ID generated from the Dashboard
+                "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Dermacet",
+                "description": "Make Purchases",
+                "image": "/media/plugins/DermacetLogoUpdated.png",
+                "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response){
+                    let proc_to_payment = document.getElementById("rzp-button1").addEventListener("click", (event)=>{
+                        let cost_of_cart = document.getElementById("cost_of_cart").value;    
+                        let order_Id_of_cart = document.getElementById("orderId_of_cart").value;
+                        if (cost_of_cart != payment.amount || order_Id_of_cart != payment.id){
+                            alert("You can't change the amount or id of Purchase!")
+                            event.preventDefault()
+                        }
+                    })
+                document.getElementById("payment_id").setAttribute("value",response.razorpay_payment_id);
+                document.getElementById("payment_signature").value = response.razorpay_signature;
+                document.getElementById("success_form").submit();
+
+                    // alert(response.razorpay_payment_id);
+                    // alert(response.razorpay_order_id);
+                    // alert(response.razorpay_signature)
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response){
+                    alert(response.error.code);
+                    alert(response.error.description);
+                    alert(response.error.source);
+                    alert(response.error.step);
+                    alert(response.error.reason);
+                    alert(response.error.metadata.order_id);
+                    alert(response.error.metadata.payment_id);
+            });
+            document.getElementById('rzp-button1').onclick = function(e){
+                rzp1.open();
+                e.preventDefault();
+            }
+            </script>
+            {% else %}
+                <script>
+                    document.getElementById('rzp-button1').onclick = function(e){
+                        alert("Fill the Delivery Details First")
+                        e.preventDefault();
+                    }
+                </script>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

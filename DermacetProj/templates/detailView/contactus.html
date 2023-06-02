@@ -141,7 +141,7 @@
                                     <input type="text" class="form-control form-group" placeholder="Name" name="name" />
                                     <input type="email" class="form-control form-group" placeholder="Email" name="email" />
                                     <textarea class="form-control form-group" placeholder="Message" name="message" ></textarea>
-                                    <button class="contact_form_submit" type="submit">Send</button>
+                                    <button id="contact_form_submit" class="contact_form_submit" type="submit">Send</button>
                                 </form>
                             </div>
                         </div>
@@ -158,15 +158,15 @@
                         <h4>Contact Info</h4>
                         <div class="d-flex info_single align-items-center">
                             <i class="fas fa-headset"></i>
-                            <span>+91 8009 054294</span>
+                            <span>+91 9718881960</span>
                         </div>
                         <div class="d-flex info_single align-items-center">
                             <i class="fas fa-envelope-open-text"></i>
-                            <span>info@flightmantra.com</span>
+                            <span>dermacetorganics@gmail.com</span>
                         </div>
                         <div class="d-flex info_single align-items-center">
                             <i class="fas fa-map-marked-alt"></i>
-                            <span>1000+ Travel partners and 65+ Service city across India, USA, Canada & UAE</span>
+                            <span>Plot No. 42 Gali No. 3, Freinds Colony Industrial Area Jhilmil Shahdara, Delhi 110032</span>
                         </div>
         
                     </div>
@@ -184,7 +184,7 @@
                     <h4>Find Us on Google Map</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore quo beatae quasi assumenda, expedita aliquam minima tenetur maiores neque incidunt repellat aut voluptas hic dolorem sequi ab porro, quia error.</p>
                     <div class="map_bind">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d471220.5631094339!2d88.04952462217592!3d22.6757520733225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f882db4908f667%3A0x43e330e68f6c2cbc!2sKolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1596988408134!5m2!1sen!2sin" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d263.4360346350131!2d77.30341852256015!3d28.673460461473844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfb50ba6ddb3f%3A0xfb460565ee6d046d!2sDermacet%20Organics!5e0!3m2!1sen!2sin!4v1685275468759!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
@@ -192,5 +192,20 @@
     </div>
 </section>
 
+<script>
+    document.getElementById("contact_form_submit").addEventListener("click", function(event){
+        let name = document.getElementsByName("name")[0].value;
+        let email = document.getElementsByName("email")[0].value;
+        let msg = document.getElementsByName("message")[0].value;
+        if(name == "" || email == "" || msg == ""){
+            alert("Please Fill All The Fields");
+            event.preventDefault();
+        }
+        else if (name.trim() === "" || email.trim() === "" || msg.trim() === "") {
+            alert("Please Type something");
+            event.preventDefault();
+        } 
+    });
+</script>
 {% endblock %}
 

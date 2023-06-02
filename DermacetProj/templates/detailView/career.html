@@ -61,7 +61,7 @@
         </div>
         <div class="col-md-12">
             <label for="career_cv" class="form-label">Upload CV Here</label>
-            <input name="CV" class="form-control" type="file" id="career_cv">
+            <input name="CV" accept="application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="form-control" type="file" id="career_cv">
         </div>
         <div class="col-12">
             <input type="submit" class="buyBtn md-2" id="career_submit" value="Submit">
@@ -83,15 +83,6 @@
   </div>
 </div>
 
-  <!-- MINE -->
-
-    <!-- <form method="post" enctype="multipart/form-data"> {% csrf_token %}
-        <input required type="text" name="name" placeholder="Enter Your Name" id="">
-        <input required type="email" name="email" placeholder="Enter Email">
-        <label for="CV">Upload CV Here</label>
-        <input required name="CV" type="file" id="CV">
-        <input type="submit" id="career_submit" value="Submit">
-    </form> -->
     <script>
         document.getElementById("career_submit").addEventListener("click", function(event){
             let name = document.getElementsByName("name")[0].value;
@@ -99,6 +90,24 @@
             let CV = document.getElementsByName("CV")[0].value;
             if(name == "" || email == "" || CV == ""){
                 alert("Please Fill All The Fields");
+                event.preventDefault();
+            }
+            else if (name.trim() === "" || email.trim() === "") {
+                alert("Please Type something");
+                event.preventDefault();
+            } 
+            else {
+            let fileExtension = CV.split('.').pop().toLowerCase();
+            // console.log(fileExtension);
+            // event.preventDefault();
+                if (fileExtension !== "pdf" && fileExtension !== "doc" && fileExtension !== "docx") {
+                    alert("Please upload a PDF or Excel file.");
+                    event.preventDefault();
+                }
+            }
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
                 event.preventDefault();
             }
         });
